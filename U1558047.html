@@ -1,0 +1,292 @@
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U1558047 - Interactive Image Showcase</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent-glow: rgba(56, 189, 248, 0.4);
+            --accent-color: #38bdf8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            background-image: 
+                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.12) 0px, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.12) 0px, transparent 50%);
+            background-attachment: fixed;
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem;
+        }
+
+        header {
+            text-align: center;
+            max-width: 700px;
+            margin-bottom: 3.5rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: -0.025em;
+            background: linear-gradient(135deg, #38bdf8 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.75rem;
+        }
+
+        header p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .card-link {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            outline: none;
+            perspective: 1000px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 18px;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+            
+            /* Core Transition definition for high-performance animation */
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        box-shadow 0.4s ease, 
+                        border-color 0.4s ease;
+            will-change: transform, box-shadow;
+            position: relative;
+        }
+
+        .card-image-wrapper {
+            position: relative;
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            /* Smooth zoom transition on image */
+            transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+            will-change: transform;
+        }
+
+        /* Overlay badge indicating external link */
+        .badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(8px);
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            opacity: 0.85;
+            transition: opacity 0.3s ease, background 0.3s ease;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            transition: color 0.3s ease;
+        }
+
+        .card-description {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Primary Hover Effect on Card: Float Upward & Rotate Slightly */
+        .card-link:hover .card,
+        .card-link:focus .card {
+            transform: translateY(-12px) scale(1.03) rotate(0.8deg);
+            border-color: var(--accent-color);
+            box-shadow: 0 20px 40px -15px var(--accent-glow),
+                        0 0 25px rgba(56, 189, 248, 0.25);
+        }
+
+        /* Secondary Hover Effect on Image: Scale & Slight Brightness Boost */
+        .card-link:hover .card-image,
+        .card-link:focus .card-image {
+            transform: scale(1.12);
+            filter: brightness(1.08);
+        }
+
+        /* Accent Title Color Change on Hover */
+        .card-link:hover .card-title,
+        .card-link:focus .card-title {
+            color: var(--accent-color);
+        }
+
+        /* Badge Glow on Hover */
+        .card-link:hover .badge,
+        .card-link:focus .badge {
+            opacity: 1;
+            background: var(--accent-color);
+            color: #0f172a;
+        }
+
+        /* Custom Hover variations for alternate visual rhythm */
+        .gallery-grid .card-link:nth-child(even):hover .card {
+            transform: translateY(-12px) scale(1.03) rotate(-0.8deg);
+        }
+
+        footer {
+            margin-top: 4rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            border-top: 1px solid var(--card-border);
+            padding-top: 2rem;
+            width: 100%;
+            max-width: 1280px;
+        }
+
+        /* Responsive tweaks for smaller screens */
+        @media (max-width: 640px) {
+            header h1 {
+                font-size: 1.875rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>純 CSS 動態影像畫廊</h1>
+        <p>將滑鼠懸停於圖片卡片上，體驗顯著的 3D 浮動、放大與旋轉動畫效果。點擊卡片將於新分頁開啟連結。</p>
+    </header>
+
+    <main class="gallery-grid">
+        
+        <!-- Card 1 -->
+        <a href="https://unsplash.com/photos/a-view-of-a-mountain-range-at-sunset-1Z2niiBPg5A" target="_blank" rel="noopener noreferrer" class="card-link">
+            <article class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="雄偉山嶽與湖泊" onerror="this.src='https://placehold.co/800x600/1e293b/38bdf8?text=Mountain+View'">
+                    <span class="badge">開啟連結 ↗</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">雄偉高山湖景</h2>
+                    <p class="card-description">感受大自然的寧靜與壯麗山脈，懸停卡片展現優雅的浮點放大視覺 эффек (Effect)。</p>
+                </div>
+            </article>
+        </a>
+
+        <!-- Card 2 -->
+        <a href="https://unsplash.com/photos/trees-on-forest-during-daytime-m39-Xm_eY9Q" target="_blank" rel="noopener noreferrer" class="card-link">
+            <article class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=800&q=80" alt="深邃神秘森林" onerror="this.src='https://placehold.co/800x600/1e293b/38bdf8?text=Deep+Forest'">
+                    <span class="badge">開啟連結 ↗</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">深邃晨霧森林</h2>
+                    <p class="card-description">陽光穿透樹冠灑落在苔蘚地表，純 CSS transform 提供順暢無阻的動態互動體驗。</p>
+                </div>
+            </article>
+        </a>
+
+        <!-- Card 3 -->
+        <a href="https://unsplash.com/photos/a-long-exposure-photo-of-a-waterfall-KMN4VEwA28U" target="_blank" rel="noopener noreferrer" class="card-link">
+            <article class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?auto=format&fit=crop&w=800&q=80" alt="壯麗飛瀑" onerror="this.src='https://placehold.co/800x600/1e293b/38bdf8?text=Waterfall'">
+                    <span class="badge">開啟連結 ↗</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">清冽山谷飛瀑</h2>
+                    <p class="card-description">湍急的水流傾瀉而下，懸停時圖片呈現高質感的 scaling 與色彩發光效果。</p>
+                </div>
+            </article>
+        </a>
+
+        <!-- Card 4 -->
+        <a href="https://unsplash.com/photos/scenic-view-of-ocean-during-sunset-KMn4VEwA28U" target="_blank" rel="noopener noreferrer" class="card-link">
+            <article class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="金色海岸夕陽" onerror="this.src='https://placehold.co/800x600/1e293b/38bdf8?text=Sunset+Beach'">
+                    <span class="badge">開啟連結 ↗</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">璀璨日落沙灘</h2>
+                    <p class="card-description">夕陽餘暉灑滿金黃沙灘，透過 `:hover` 偽類結合彈性 cubic-bezier 帶來流暢反饋。</p>
+                </div>
+            </article>
+        </a>
+
+        <!-- Card 5 -->
+        <a href="https://unsplash.com/photos/a-night-sky-filled-with-stars-above-a-mountain-rI5cO7aKzC4" target="_blank" rel="noopener noreferrer" class="card-link">
+            <article class="card">
+                <div class="card-image-wrapper">
+                    <img class="card-image" src="https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=800&q=80" alt="璀璨星空銀河" onerror="this.src='https://placehold.co/800x600/1e293b/38bdf8?text=Night+Sky'">
+                    <span class="badge">開啟連結 ↗</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">寂靜夜空銀河</h2>
+                    <p class="card-description">浩瀚無垠的雪山星空，零 JavaScript 實現完美的滑鼠懸停與高質感卡片互動。</p>
+                </div>
+            </article>
+        </a>
+
+    </main>
+
+    <footer>
