@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>《藥師少女的獨語》官方限定週邊商店</title>
+  <!-- 引入外部 CSS 檔案 -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- 頁首與導覽列 -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-title">藥師少女的獨語</div>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#shop">週邊商品</a></li>
+        <li><a href="#about">關於後宮</a></li>
+      </ul>
+    </nav>
+    <div class="cart-icon-wrapper" id="cartIcon">
+      🛒 購物車
+      <span class="cart-badge" id="cartCount">0</span>
+    </div>
+  </header>
+
+  <!-- 主視覺 Banner -->
+  <section class="hero-banner">
+    <h1>翡翠宮與後宮典藏週邊</h1>
+    <p>搜羅貓貓試毒專用配件、壬氏奢華金絲禮品與玉葉妃特調花草茶，重現宮廷經典氛圍。</p>
+  </section>
+
+  <!-- 商品列表區塊 -->
+  <main class="shop-container" id="shop">
+    <h2 class="section-title">熱門限定商品</h2>
+    <div class="product-grid" id="productGrid">
+      <!-- JavaScript 會動態在此處渲染 01.jpg~05.jpg 的商品 -->
+    </div>
+  </main>
+
+  <!-- 頁尾 -->
+  <footer>
+    <p>&copy; 2026 《藥師少女的獨語》週邊販售專案版權所有。</p>
+  </footer>
+
+  <!-- JavaScript 邏輯：商品資料與人物散開特效 -->
+  <script>
+    // 1. 商品資料定義 (對應 images/01.jpg ~ images/05.jpg)
+    const products = [
+      {
+        code: "01.jpg",
+        name: "貓貓的草藥札記紙膠帶（組）",
+        desc: "以貓貓記錄草藥與毒物試驗的手帳為靈感，收錄古典草藥插畫與貓貓生動表情包。",
+        image: "images/01.jpg"
+      },
+      {
+        code: "02.jpg",
+        name: "壬氏大人宮廷紫藤精雕雙層玻璃杯",
+        desc: "以壬氏奢華氣質為主題，精雕金絲紫藤花紋，倒入飲品呈現絕佳光影層次。",
+        image: "images/02.jpg"
+      },
+      {
+        code: "03.jpg",
+        name: "翡翠宮典藏·試毒銀匙造型鑰匙圈",
+        desc: "重現貓貓翡翠宮試毒招牌道具，復古銀質感搭配翡翠色水鑽與 Q 版貓貓吊飾。",
+        image: "images/03.jpg"
+      },
+      {
+        code: "04.jpg",
+        name: "興奮喵喵！貓貓貓耳Q版兩用絨毛抱枕毯",
+        desc: "貓貓聽到「毒與藥」時興奮貓耳造型，極致親膚絨毛，內藏溫暖空調毛毯。",
+        image: "images/04.jpg"
+      },
+      {
+        code: "05.jpg",
+        name: "玉葉妃雅致茶席·後宮特調花果茶禮盒",
+        desc: "翡翠宮玉葉妃推薦！精選茉莉白茶與玫瑰烏龍，古風書盒設計附限定明信片。",
+        image: "images/05.jpg"
+      }
+    ];
+
+    // 特效所使用的動漫角色頭像 (使用 SVG 繪製可愛貓貓與壬氏頭像)
+    const avatarDataURIs = [
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%232e7d32'/><path d='M25 30 L35 10 L45 30 Z M55 30 L65 10 L75 30 Z' fill='%231b5e20'/><circle cx='35' cy='50' r='6' fill='%23fff'/><circle cx='65' cy='50' r='6' fill='%23fff'/><circle cx='35' cy='50' r='3' fill='%23000'/><circle cx='65' cy='50' r='3' fill='%23000'/><path d='M45 65 Q50 70 55 65' stroke='%23fff' stroke-width='3' fill='none'/></svg>",
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%236a1b9a'/><circle cx='35' cy='45' r='5' fill='%23fff'/><circle cx='65' cy='45' r='5' fill='%23fff'/><circle cx='35' cy='45' r='2.5' fill='%23000'/><circle cx='65' cy='45' r='2.5' fill='%23000'/><path d='M40 65 Q50 75 60 65' stroke='%23ffd700' stroke-width='3' fill='none'/></svg>",
+      "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='45' fill='%23c62828'/><path d='M20 25 L35 5 L45 25 Z M55 25 L65 5 L80 25 Z' fill='%23b71c1c'/><circle cx='35' cy='50' r='5' fill='%23fff'/><circle cx='65' cy='50' r='5' fill='%23fff'/><circle cx='35' cy='50' r='2.5' fill='%23000'/><circle cx='65' cy='50' r='2.5' fill='%23000'/><path d='M42 62 Q50 68 58 62' stroke='%23fff' stroke-width='3' fill='none'/></svg>"
+    ];
+
+    let cartCount = 0;
+
+    // 2. 渲染商品至頁面
+    function renderProducts() {
+      const grid = document.getElementById("productGrid");
+      grid.innerHTML = products.map(product => `
+        <div class="product-card">
+          <div class="product-image-container">
+            <img src="${product.image}" alt="${product.name}" onerror="this.src='https://via.placeholder.com/300?text=Image+NotFound'">
+          </div>
+          <div class="product-info">
+            <div class="product-code">編號：${product.code}</div>
+            <h3 class="product-title">${product.name}</h3>
+            <p class="product-description">${product.desc}</p>
+            <div class="product-bottom-bar">
+              <button class="add-to-cart-btn" onclick="addToCart(event)">加入購物車</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // 3. 加入購物車觸發酷炫「人物散開」粒子特效
+    function addToCart(event) {
+      cartCount++;
+      document.getElementById("cartCount").innerText = cartCount;
+
+      const btn = event.currentTarget;
+      const rect = btn.getBoundingClientRect();
+      const startX = rect.left + rect.width / 2;
+      const startY = rect.top + rect.height / 2;
+
+      // 產生 12 個向四周爆發散開的人物粒子
+      for (let i = 0; i < 12; i++) {
+        createAnimeParticle(startX, startY);
+      }
+    }
+
+    // 4. 創建動態散射粒子
+    function createAnimeParticle(x, y) {
+      const particle = document.createElement("div");
+      particle.className = "anime-particle";
+
+      // 隨機選擇角色頭像圖案
+      const randomAvatar = avatarDataURIs[Math.floor(Math.random() * avatarDataURIs.length)];
+      particle.style.backgroundImage = `url("${randomAvatar}")`;
+
+      // 計算向外四散的擴散角度與距離
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = 80 + Math.random() * 120; // 散射距離
+      const tx = Math.cos(angle) * velocity;
+      const ty = Math.sin(angle) * velocity;
+
+      particle.style.setProperty('--tx', `${tx}px`);
+      particle.style.setProperty('--ty', `${ty}px`);
+      particle.style.left = `${x - 22}px`;
+      particle.style.top = `${y - 22}px`;
+
+      document.body.appendChild(particle);
+
+      // 動畫結束後自動清除元素
+      setTimeout(() => {
+        particle.remove();
+      }, 800);
+    }
+
+    // 初始化執行
+    window.onload = renderProducts;
+  </script>
+</body>
+</html>
