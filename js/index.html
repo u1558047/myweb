@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>藥師少女的獨語 - 官方授權宮廷精品旗艦店 | The Apothecary Diaries Official Store</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Noto+Serif+TC:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            emerald: {
+              950: '#041c14',
+              900: '#062c20',
+              800: '#0a4634',
+              700: '#0f614a',
+              500: '#10b981',
+              400: '#34d399',
+            },
+            imperial: {
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              goldDark: '#AA7C11',
+              crimson: '#800020',
+              crimsonLight: '#A31C37',
+              jade: '#00A86B',
+              jadeDeep: '#004B38',
+              purple: '#3A154A',
+              purpleLight: '#6A2C85',
+              darkBg: '#090D0C',
+              cardBg: '#121A18'
+            }
+          },
+          fontFamily: {
+            serif: ['"Noto Serif TC"', 'serif'],
+            cinzel: ['"Cinzel"', 'serif'],
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          animation: {
+            'pulse-glow': 'pulseGlow 2.5s infinite alternate',
+            'float-slow': 'float 6s ease-in-out infinite',
+            'shimmer': 'shimmer 3s infinite linear',
+          },
+          keyframes: {
+            pulseGlow: {
+              '0%': { boxShadow: '0 0 15px rgba(212, 175, 55, 0.2)' },
+              '100%': { boxShadow: '0 0 35px rgba(212, 175, 55, 0.6)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            shimmer: {
+              '0%': { backgroundPosition: '-200% 0' },
+              '100%': { backgroundPosition: '200% 0' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style id="main-styles">
+    /* Global Oriental Imperial Styling */
+    body {
+      background-color: #080C0B;
+      color: #E2E8F0;
+      font-family: 'Noto Serif TC', serif;
+      overflow-x: hidden;
+    }
+
+    /* Glassmorphism Panels */
+    .glass-panel {
+      background: rgba(18, 26, 24, 0.75);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+
+    .glass-panel-gold {
+      background: linear-gradient(135deg, rgba(212,175,55,0.08) 0%, rgba(6,44,32,0.4) 100%);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(212, 175, 55, 0.35);
+    }
+
+    /* Custom Golden Borders & Frames */
+    .oriental-border {
+      position: relative;
+    }
+    .oriental-border::before, .oriental-border::after {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border: 2px solid #D4AF37;
+      pointer-events: none;
+    }
+    .oriental-border::before { top: 4px; left: 4px; border-right: 0; border-bottom: 0; }
+    .oriental-border::after { bottom: 4px; right: 4px; border-left: 0; border-top: 0; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #061510;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #1d5240;
+      border-radius: 4px;
+      border: 1px solid #d4af3744;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #d4af37;
+    }
+
+    /* Particle Canvas Overlay */
+    #burst-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* Floating Canvas for Ambient Petals & Stamina */
+    #ambient-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Shiny Text */
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF0B9 0%, #D4AF37 50%, #996B10 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .crimson-gradient-text {
+      background: linear-gradient(135deg, #FF7B93 0%, #A31C37 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Badge Pulse */
+    .cart-pulse {
+      animation: cartPulse 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    @keyframes cartPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4) rotate(-8deg); }
+      100% { transform: scale(1); }
+    }
+
+    /* Image Fallback Container */
+    .img-container {
+      position: relative;
+      overflow: hidden;
+      background-color: #0c1814;
+    }
+  </style>
+</head>
+<body class="selection:bg-imperial-gold selection:text-black">
+
+  <canvas id="burst-canvas"></canvas>
+
+  <!-- Top Announcement Bar -->
+  <div class="bg-gradient-to-r from-imperial-crimson via-emerald-900 to-imperial-crimson text-imperial-goldLight text-xs py-2 px-4 text-center border-b border-imperial-gold/30 flex justify-between items-center z-50 relative">
+    <div class="hidden sm:flex items-center space-x-2 text-imperial-gold/80">
+      <i class="fa-solid fa-vial-circle-check text-imperial-gold"></i>
+      <span>宮廷試毒合格認證商品</span>
+    </div>
+    <div class="mx-auto sm:mx-0 font-medium tracking-wide">
+      ✨ 慶祝動畫二期播映！全館滿 <span class="text-imperial-gold font-bold">NT$ 1,000</span> 現折 <span class="text-imperial-gold font-bold">NT$ 100</span>｜輸入折扣碼：<span class="bg-black/40 px-2 py-0.5 rounded border border-imperial-gold/40 text-imperial-gold font-mono">MAOMAO100</span>
+    </div>
+    <div class="hidden md:flex items-center space-x-4 text-xs text-imperial-gold/80">
+      <a href="#faq" class="hover:underline hover:text-white transition">常見問題</a>
+      <span>|</span>
+      <a href="#about" class="hover:underline hover:text-white transition">翡翠宮茶會</a>
+    </div>
+  </div>
+
+  <header class="sticky top-0 z-40 backdrop-blur-md bg-imperial-darkBg/90 border-b border-imperial-gold/20 transition-all duration-300" id="main-header">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Logo & Title -->
+      <a href="#" class="flex items-center space-x-3 group">
+        <div class="w-12 h-12 rounded-full border-2 border-imperial-gold flex items-center justify-center bg-emerald-950/80 group-hover:rotate-12 transition-transform duration-300 shadow-[0_0_15px_rgba(212,175,55,0.3)]">
+          <span class="text-2xl">🧪</span>
+        </div>
+        <div>
+          <h1 class="text-xl sm:text-2xl font-bold tracking-wider font-serif gold-gradient-text flex items-center gap-2">
+            藥師少女的獨語
+            <span class="text-xs px-2 py-0.5 rounded border border-imperial-crimson text-red-300 bg-imperial-crimson/30 font-sans hidden sm:inline-block">周邊專賣</span>
+          </h1>
+          <p class="text-[10px] text-emerald-400/70 tracking-widest uppercase font-cinzel">The Apothecary Diaries Collection</p>
+        </div>
+      </a>
+
+      <!-- Desktop Nav links -->
+      <nav class="hidden md:flex items-center space-x-8 font-serif text-sm">
+        <a href="#hero" class="text-imperial-gold hover:text-white transition relative py-1 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-imperial-gold">首頁主題</a>
+        <a href="#products" class="text-gray-300 hover:text-imperial-gold transition py-1">獨家商品</a>
+        <a href="#story" class="text-gray-300 hover:text-imperial-gold transition py-1">宮廷軼事</a>
+        <a href="#reviews" class="text-gray-300 hover:text-imperial-gold transition py-1">試毒評價</a>
+      </nav>
+
+      <!-- Cart Button & Code View Toggle -->
+      <div class="flex items-center space-x-4">
+        
+        <!-- Cart Icon Button -->
+        <button id="cart-btn" onclick="toggleCartDrawer(true)" class="relative p-2.5 rounded-full border border-imperial-gold/40 bg-emerald-950/60 hover:bg-emerald-900/80 hover:border-imperial-gold text-imperial-gold transition shadow-md group">
+          <i class="fa-solid fa-basket-shopping text-xl transition-transform group-hover:scale-110"></i>
+          <span id="cart-count" class="absolute -top-1.5 -right-1.5 bg-imperial-crimson text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center border border-imperial-gold shadow-lg font-sans">0</span>
+        </button>
+
+        <!-- Mobile Menu Button -->
+        <button class="md:hidden text-imperial-gold text-2xl p-2" onclick="toggleMobileMenu()">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <section id="hero" class="relative min-h-[580px] lg:min-h-[640px] flex items-center justify-center overflow-hidden border-b border-imperial-gold/20">
+    
+    <!-- Ambient Particles Canvas -->
+    <canvas id="ambient-canvas"></canvas>
+
+    <!-- Background Art Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-r from-imperial-darkBg via-emerald-950/70 to-imperial-darkBg z-10"></div>
+    <div class="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-emerald-800/20 via-transparent to-transparent z-10"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20 py-16 text-center lg:text-left grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      
+      <!-- Hero Left Content -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-imperial-gold/40 bg-imperial-gold/10 text-imperial-gold text-xs font-serif tracking-widest backdrop-blur-md">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+          後宮翡翠宮典藏 ‧ 官方周邊全新企劃
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold font-serif leading-tight tracking-wide text-white">
+          深宮中的藥草香氣 <br/>
+          <span class="gold-gradient-text">重現貓貓與壬氏的宮廷美學</span>
+        </h1>
+
+        <p class="text-gray-300 text-sm sm:text-base max-w-2xl leading-relaxed font-serif">
+          以《藥師少女的獨語》獨特東方宮廷風采為靈感，結合草藥筆記、壬氏華麗圖騰與翡翠宮茶會元素，特別打造5款精緻極致典藏週邊，邀您親身體驗後宮謎團與草藥樂趣。
+        </p>
+
+        <!-- CTA Action Group -->
+        <div class="pt-4 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+          <a href="#products" class="px-8 py-3.5 rounded-lg bg-gradient-to-r from-imperial-gold to-imperial-goldDark text-emerald-950 font-bold text-center font-serif shadow-[0_0_25px_rgba(212,175,55,0.4)] hover:shadow-[0_0_35px_rgba(212,175,55,0.7)] hover:scale-[1.02] transition duration-300 flex items-center justify-center gap-2 border border-imperial-goldLight">
+            <i class="fa-solid fa-bag-shopping"></i> 探索全系列周邊
+          </a>
+          <button onclick="scrollToFeatured()" class="px-8 py-3.5 rounded-lg glass-panel text-imperial-gold hover:text-white border border-imperial-gold/40 hover:border-imperial-gold font-serif transition duration-300 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-sparkles text-imperial-gold"></i> 翡翠宮試毒茶會特企
+          </button>
+        </div>
+
+        <!-- Micro stats -->
+        <div class="pt-8 grid grid-cols-3 gap-4 border-t border-imperial-gold/20 max-w-lg mx-auto lg:mx-0 text-center sm:text-left">
+          <div>
+            <div class="text-xl sm:text-2xl font-bold font-cinzel text-imperial-gold">100%</div>
+            <div class="text-xs text-gray-400">官方正版授權</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-bold font-cinzel text-imperial-gold">5/5 ★</div>
+            <div class="text-xs text-gray-400">粉絲滿意度評價</div>
+          </div>
+          <div>
+            <div class="text-xl sm:text-2xl font-bold font-cinzel text-imperial-gold">24hr</div>
+            <div class="text-xs text-gray-400">宮廷極速出貨</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Right Display Visual -->
+      <div class="lg:col-span-5 relative flex justify-center">
+        <div class="relative w-72 h-72 sm:w-96 sm:h-96 rounded-full border-2 border-imperial-gold/30 bg-gradient-to-b from-imperial-crimson/20 to-emerald-900/30 p-4 animate-pulse-glow flex items-center justify-center">
+          
+          <!-- Outer Rotating Decorative Ring -->
+          <div class="absolute inset-0 rounded-full border border-dashed border-imperial-gold/40 animate-[spin_60s_linear_infinite]"></div>
+
+          <!-- Central Hero Card Showcase -->
+          <div class="w-full h-full rounded-2xl glass-panel-gold p-6 flex flex-col justify-between oriental-border shadow-2xl relative overflow-hidden group">
+            <div class="flex justify-between items-start">
+              <span class="text-xs font-mono px-2 py-1 bg-imperial-gold/20 text-imperial-gold rounded border border-imperial-gold/30">主打人氣 No.1</span>
+              <span class="text-2xl">🍃</span>
+            </div>
+
+            <div class="my-auto text-center space-y-2">
+              <div class="w-28 h-28 mx-auto rounded-full border-2 border-imperial-gold/60 p-1 bg-black/40 shadow-inner overflow-hidden">
+                <img id="hero-preview-img" src="images/01.jpg" onerror="this.src='https://placehold.co/300x300/062c20/D4AF37?text=%E8%97%A5%E5%B8%AB%EB%8A%B5%E5%A5%B301'" alt="Maomao Washi Tape" class="w-full h-full object-cover rounded-full transform group-hover:scale-110 transition duration-500" />
+              </div>
+              <h3 class="font-serif font-bold text-imperial-goldLight text-lg">貓貓草藥手帳紙膠帶</h3>
+              <p class="text-xs text-gray-300 font-serif line-clamp-2">古典草藥插畫 ‧ 貓貓表情包 ‧ 手帳收藏首選</p>
+            </div>
+
+            <div class="flex justify-between items-center pt-2 border-t border-imperial-gold/20">
+              <span class="text-imperial-gold font-bold font-sans">NT$ 280</span>
+              <button onclick="quickAddToCart(0, event)" class="px-3 py-1.5 rounded bg-imperial-gold text-black font-bold text-xs hover:bg-white transition font-sans flex items-center gap-1">
+                <i class="fa-solid fa-plus"></i> 加入購物車
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="products" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+    
+    <div class="text-center max-w-3xl mx-auto mb-12 space-y-3">
+      <h2 class="text-xs font-cinzel tracking-widest text-imperial-gold uppercase">Exclusive Collection</h2>
+      <p class="text-2xl sm:text-4xl font-bold font-serif gold-gradient-text">宮廷精選商品一覽</p>
+      <div class="w-16 h-0.5 bg-imperial-gold mx-auto my-2"></div>
+      <p class="text-sm text-gray-400 font-serif">點擊商品卡片可開啟快速預覽，體驗加入購物車獨家「角色散開」視覺特效！</p>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="flex flex-wrap justify-center gap-2 sm:gap-3 mb-10 font-serif text-sm">
+      <button onclick="filterProducts('all')" class="filter-btn active px-4 py-2 rounded-full border border-imperial-gold bg-imperial-gold text-black font-bold transition">全部商品 (5)</button>
+      <button onclick="filterProducts('stationery')" class="filter-btn px-4 py-2 rounded-full border border-imperial-gold/30 glass-panel text-gray-300 hover:border-imperial-gold hover:text-imperial-gold transition">文具手帳</button>
+      <button onclick="filterProducts('household')" class="filter-btn px-4 py-2 rounded-full border border-imperial-gold/30 glass-panel text-gray-300 hover:border-imperial-gold hover:text-imperial-gold transition">生活器皿</button>
+      <button onclick="filterProducts('accessories')" class="filter-btn px-4 py-2 rounded-full border border-imperial-gold/30 glass-panel text-gray-300 hover:border-imperial-gold hover:text-imperial-gold transition">精緻飾品</button>
+      <button onclick="filterProducts('plush')" class="filter-btn px-4 py-2 rounded-full border border-imperial-gold/30 glass-panel text-gray-300 hover:border-imperial-gold hover:text-imperial-gold transition">絨毛抱枕</button>
+      <button onclick="filterProducts('tea')" class="filter-btn px-4 py-2 rounded-full border border-imperial-gold/30 glass-panel text-gray-300 hover:border-imperial-gold hover:text-imperial-gold transition">宮廷茶禮</button>
+    </div>
+
+    <!-- Product Grid -->
+    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Injected dynamically via JS -->
+    </div>
+  </section>
+
+  <section id="story" class="py-16 bg-emerald-950/40 border-y border-imperial-gold/20 relative">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="space-y-6">
+          <span class="text-xs font-mono text-imperial-gold tracking-widest uppercase">The Lore & Craftsmanship</span>
+          <h2 class="text-3xl font-serif font-bold text-white">
+            為每位愛好者提煉出的 <br/>
+            <span class="crimson-gradient-text">「宮廷試毒」經典質感</span>
+          </h2>
+          <p class="text-gray-300 text-sm leading-relaxed font-serif">
+            《藥師少女的獨語》帶領我們踏入充滿玄機與色彩的後宮世界。本次周邊研發團隊深度考據原作中貓貓對草藥與毒物的極致偏執，以及壬氏大人的貴族風采，精心遴選材質與紋樣設計。
+          </p>
+          <div class="space-y-4 font-serif text-sm">
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-imperial-gold/20 border border-imperial-gold text-imperial-gold flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa-solid fa-leaf"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-imperial-goldLight">草藥與古典圖騰結合</h4>
+                <p class="text-gray-400 text-xs">手工描繪古典草藥圖譜與後宮精細花紋，呈現濃厚東方古風韻味。</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-8 h-8 rounded-full bg-imperial-gold/20 border border-imperial-gold text-imperial-gold flex items-center justify-center flex-shrink-0 mt-1">
+                <i class="fa-solid fa-gem"></i>
+              </div>
+              <div>
+                <h4 class="font-bold text-imperial-goldLight">翡翠與銀器質感工藝</h4>
+                <p class="text-gray-400 text-xs">使用復古鋅合金鍍銀與晶瑩雙層玻璃，完美重現劇中試毒銀匙與御用器皿。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="glass-panel p-8 rounded-2xl oriental-border shadow-2xl space-y-6">
+            <h3 class="text-lg font-bold font-serif text-imperial-gold text-center border-b border-imperial-gold/20 pb-3">
+              🍵 翡翠宮專屬茶會活動邀請
+            </h3>
+            <p class="text-xs text-gray-300 leading-relaxed font-serif">
+              凡單筆消費滿 <span class="text-imperial-gold font-bold">NT$ 1,500</span>，即贈「貓貓表情包金屬胸章」乙個（隨機不挑款），並享有試毒茶會特調茶包試飲包組合！
+            </p>
+            <div class="bg-black/50 p-4 rounded-lg border border-imperial-gold/30 text-center">
+              <div class="text-xs text-gray-400 font-mono">限量贈品剩餘數量</div>
+              <div class="text-3xl font-bold font-cinzel text-imperial-gold my-1">42 / 100</div>
+              <div class="w-full bg-gray-800 rounded-full h-2 overflow-hidden">
+                <div class="bg-imperial-gold h-full rounded-full" style="width: 58%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <h2 class="text-2xl font-bold font-serif gold-gradient-text">宮廷試毒員好評推薦</h2>
+      <p class="text-xs text-gray-400 mt-2 font-serif">來自各地動漫愛好者的實體收藏開箱回饋</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="glass-panel p-6 rounded-xl space-y-4">
+        <div class="flex justify-between items-center">
+          <div class="font-serif font-bold text-imperial-goldLight">宮廷御用手帳控</div>
+          <div class="text-imperial-gold text-xs">★★★★★</div>
+        </div>
+        <p class="text-xs text-gray-300 font-serif leading-relaxed">
+          「貓貓的草藥紙膠帶質感真的太棒了！上面印的貓貓興奮表情跟毒藥圖案超級精細，黏在手帳上完全是藝術品！」
+        </p>
+        <div class="text-[10px] text-emerald-400 font-mono">購買商品：貓貓草藥手帳紙膠帶</div>
+      </div>
+
+      <div class="glass-panel p-6 rounded-xl space-y-4">
+        <div class="flex justify-between items-center">
+          <div class="font-serif font-bold text-imperial-goldLight">壬氏大人親衛隊</div>
+          <div class="text-imperial-gold text-xs">★★★★★</div>
+        </div>
+        <p class="text-xs text-gray-300 font-serif leading-relaxed">
+          「雙層玻璃杯的金絲紫藤超精緻！倒入冷泡茶時光影折射超美，完全感受得到壬氏大人的尊貴氣場，超值！」
+        </p>
+        <div class="text-[10px] text-emerald-400 font-mono">購買商品：壬氏大人宮廷紫藤雙層玻璃杯</div>
+      </div>
+
+      <div class="glass-panel p-6 rounded-xl space-y-4">
+        <div class="flex justify-between items-center">
+          <div class="font-serif font-bold text-imperial-goldLight">後宮茶會愛好者</div>
+          <div class="text-imperial-gold text-xs">★★★★★</div>
+        </div>
+        <p class="text-xs text-gray-300 font-serif leading-relaxed">
+          「玉葉妃茶禮盒包裝做成像精裝書一樣，擺在書架上超好看！茶包香氣很幽雅，送禮自用都很適合。」
+        </p>
+        <div class="text-[10px] text-emerald-400 font-mono">購買商品：玉葉妃雅致茶席花果茶禮盒</div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-black border-t border-imperial-gold/30 text-gray-400 font-serif text-xs py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div class="space-y-3">
+        <h3 class="text-lg font-bold gold-gradient-text">藥師少女的獨語</h3>
+        <p class="text-gray-500 text-xs leading-relaxed">
+          本網站為《藥師少女的獨語》動漫精品展示專題頁面，所有作品視覺與角色著作權歸原作及製作委員會所有。
+        </p>
+      </div>
+
+      <div>
+        <h4 class="text-imperial-gold font-bold mb-3">購物指南</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white transition">付款與物流說明</a></li>
+          <li><a href="#" class="hover:text-white transition">試毒包裝防護標準</a></li>
+          <li><a href="#" class="hover:text-white transition">退換貨須知</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-imperial-gold font-bold mb-3">官方連結</h4>
+        <ul class="space-y-2 text-gray-400">
+          <li><a href="#" class="hover:text-white transition">動畫官方網站</a></li>
+          <li><a href="#" class="hover:text-white transition">翡翠宮茶會情報</a></li>
+          <li><a href="#" class="hover:text-white transition">粉絲專頁 & X (Twitter)</a></li>
+        </ul>
+      </div>
+
+      <div class="space-y-3">
+        <h4 class="text-imperial-gold font-bold">訂閱後宮情報電子報</h4>
+        <div class="flex">
+          <input type="email" placeholder="輸入您的 Email..." class="bg-gray-900 border border-imperial-gold/40 text-xs p-2 rounded-l w-full text-white focus:outline-none focus:border-imperial-gold" />
+          <button onclick="subscribeNewsletter()" class="bg-imperial-gold text-black font-bold px-3 rounded-r hover:bg-white transition">訂閱</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-gray-900 text-center text-gray-600">
+      <p>© 2026 The Apothecary Diaries Official Merchandise Fan Store. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Quick View Modal -->
+  <div id="product-modal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
+    <div class="glass-panel-gold rounded-2xl max-w-2xl w-full p-6 sm:p-8 relative oriental-border max-h-[90vh] overflow-y-auto">
+      <button onclick="closeModal()" class="absolute top-4 right-4 text-imperial-gold hover:text-white text-2xl w-8 h-8 flex items-center justify-center rounded-full bg-black/40">
+        &times;
+      </button>
+      <div id="modal-content" class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Shopping Cart Slide-out Drawer -->
+  <div id="cart-drawer-backdrop" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden transition-opacity" onclick="toggleCartDrawer(false)"></div>
+  <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-96 bg-imperial-darkBg border-l border-imperial-gold/30 z-50 transform translate-x-full transition-transform duration-300 flex flex-col justify-between shadow-2xl">
+    
+    <!-- Drawer Header -->
+    <div class="p-6 border-b border-imperial-gold/20 flex justify-between items-center bg-emerald-950/40">
+      <h3 class="font-serif font-bold text-lg gold-gradient-text flex items-center gap-2">
+        <i class="fa-solid fa-basket-shopping"></i> 我的後宮購物車
+      </h3>
+      <button onclick="toggleCartDrawer(false)" class="text-gray-400 hover:text-white text-xl p-1">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+
+    <!-- Cart Items Container -->
+    <div id="cart-items" class="p-6 space-y-4 overflow-y-auto flex-1">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- Drawer Footer / Checkout -->
+    <div class="p-6 border-t border-imperial-gold/20 bg-emerald-950/60 space-y-4">
+      
+      <!-- Free Shipping Bar -->
+      <div class="space-y-1">
+        <div class="flex justify-between text-xs font-serif text-gray-300">
+          <span>滿 NT$ 1,000 享免運</span>
+          <span id="shipping-status-text" class="text-imperial-gold font-bold">還差 NT$ 1,000</span>
+        </div>
+        <div class="w-full bg-gray-800 rounded-full h-1.5 overflow-hidden">
+          <div id="shipping-progress" class="bg-imperial-gold h-full transition-all duration-300" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Promo Code Input -->
+      <div class="flex gap-2">
+        <input type="text" id="promo-code" placeholder="輸入折扣碼 (如 MAOMAO100)" class="bg-black/60 border border-imperial-gold/30 rounded text-xs p-2.5 text-white flex-1 focus:outline-none focus:border-imperial-gold font-mono uppercase" />
+        <button onclick="applyPromoCode()" class="px-3 py-2 bg-emerald-800 text-imperial-gold font-bold text-xs rounded border border-imperial-gold/40 hover:bg-emerald-700 transition">套用</button>
+      </div>
+
+      <!-- Price Breakdown -->
+      <div class="space-y-1.5 text-xs font-serif pt-2 border-t border-imperial-gold/10">
+        <div class="flex justify-between text-gray-400">
+          <span>商品小計</span>
+          <span id="cart-subtotal">NT$ 0</span>
+        </div>
+        <div class="flex justify-between text-gray-400">
+          <span>折扣優惠</span>
+          <span id="cart-discount" class="text-imperial-crimsonLight">- NT$ 0</span>
+        </div>
+        <div class="flex justify-between text-base font-bold text-imperial-gold pt-2 border-t border-imperial-gold/20">
+          <span>總計金額</span>
+          <span id="cart-total" class="font-sans">NT$ 0</span>
+        </div>
+      </div>
+
+      <!-- Checkout Button -->
+      <button onclick="simulateCheckout()" class="w-full py-3 bg-gradient-to-r from-imperial-gold to-imperial-goldDark text-black font-bold text-sm rounded shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.6)] transition duration-300 font-serif">
+        前往宮廷結帳 <i class="fa-solid fa-arrow-right ml-1"></i>
+      </button>
+    </div>
+  </aside>
+
+  <script>
+    // --------------------------------------------------
+    // Product Data (Corresponding to 01.jpg - 05.jpg)
+    // --------------------------------------------------
+    const products = [
+      {
+        id: "01",
+        name: "貓貓草藥手帳紙膠帶",
+        englishName: "Maomao Herb Notes Washi Tape Set",
+        category: "stationery",
+        categoryLabel: "文具手帳",
+        price: 280,
+        image: "images/01.jpg",
+        fallbackText: "01.jpg - 貓貓紙膠帶",
+        rating: 5.0,
+        badge: "熱銷商品",
+        desc: "以主角貓貓平時記錄草藥與毒物試驗的手帳為靈感設計。包含各種古典草藥插畫、貓貓各種生動表情包，以及經典台詞印花。適用於手帳裝飾與筆記標記。",
+        specs: ["寬度：3cm / 5cm 雙捲組", "材質：日本和紙 + 特殊油墨", "長度：每捲 10m"]
+      },
+      {
+        id: "02",
+        name: "壬氏大人宮廷紫藤精雕雙層玻璃杯",
+        englishName: "Jinshi Wisteria Double-Walled Glass",
+        category: "household",
+        categoryLabel: "生活器皿",
+        price: 680,
+        image: "images/02.jpg",
+        fallbackText: "02.jpg - 壬氏玻璃杯",
+        rating: 4.9,
+        badge: "貴族限定",
+        desc: "以後宮頂級管理者「壬氏」的奢華氣質為主題，採用高級雙層耐熱玻璃製作。杯身印有細緻的金絲紫藤花紋與象徵其身份的圖騰，倒入飲品時呈現絕佳的光影層次。",
+        specs: ["容量：350ml", "材質：高硼矽耐熱雙層玻璃", "耐溫：-20°C ~ 150°C"]
+      },
+      {
+        id: "03",
+        name: "翡翠宮典藏·試毒銀匙造型鑰匙圈",
+        englishName: "Jade Palace Poison-Test Silver Spoon Keychain",
+        category: "accessories",
+        categoryLabel: "精緻飾品",
+        price: 450,
+        image: "images/03.jpg",
+        fallbackText: "03.jpg - 試毒銀匙鑰匙圈",
+        rating: 4.8,
+        badge: "經典復刻",
+        desc: "重現貓貓在翡翠宮擔任試毒女官時的招牌道具！精緻合金材質搭配復古銀質感處理，匙柄鑲嵌小巧翡翠色水鑽，兼具收藏與日常攜帶實用性。",
+        specs: ["長度：匙身約 8.5cm", "材質：鋅合金鍍復古銀 + 合成翡翠水鑽", "附贈：宮廷禮盒裝"]
+      },
+      {
+        id: "04",
+        name: "興奮喵喵！貓貓貓耳Q版兩用絨毛抱枕毯",
+        englishName: "Cat-Eared Maomao Plush Pillow Blanket",
+        category: "plush",
+        categoryLabel: "絨毛抱枕",
+        price: 980,
+        image: "images/04.jpg",
+        fallbackText: "04.jpg - 貓貓貓耳抱枕毯",
+        rating: 5.0,
+        badge: "超高人氣",
+        desc: "當貓貓聽到「毒與藥」時露出的貓耳興奮表情 Q 版化！選用極致親膚的超柔短絨毛布料，抱枕內部藏有厚實溫暖的空調毛毯，居家追劇必備。",
+        specs: ["抱枕尺寸：40cm x 40cm", "毛毯尺寸：100cm x 150cm", "材質：超柔水晶短絨毛"]
+      },
+      {
+        id: "05",
+        name: "玉葉妃雅致茶席·後宮特調花果茶禮盒",
+        englishName: "Lady Gyokuyo Royal Tea Selection Box",
+        category: "tea",
+        categoryLabel: "宮廷茶禮",
+        price: 1280,
+        image: "images/05.jpg",
+        fallbackText: "05.jpg - 玉葉妃茶禮盒",
+        rating: 4.9,
+        badge: "翡翠宮推薦",
+        desc: "由翡翠宮主位「玉葉妃」推薦的高級宮廷茶飲禮盒。內含「茉莉白茶」與「玫瑰烏龍」兩款經典風味茶包，外盒採用精裝古典古風書盒設計，隨盒附贈限定明信片。",
+        specs: ["內容：茉莉白茶 10 包 + 玫瑰烏龍 10 包", "包裝：精裝古風磁吸書盒", "贈品：翡翠宮茶會特製明信片 1 張"]
+      }
+    ];
+
+    let cart = [];
+    let appliedDiscount = 0;
+
+    // --------------------------------------------------
+    // Render Product Cards
+    // --------------------------------------------------
+    function renderProducts(filter = 'all') {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = '';
+
+      const filtered = filter === 'all' 
+        ? products 
+        : products.filter(p => p.category === filter);
+
+      filtered.forEach((p, index) => {
+        const card = document.createElement('div');
+        card.className = "glass-panel rounded-2xl overflow-hidden oriental-border hover:border-imperial-gold transition duration-500 flex flex-col justify-between group shadow-lg";
+        
+        card.innerHTML = `
+          <div>
+            <!-- Product Image Container -->
+            <div class="img-container h-64 sm:h-72 w-full relative overflow-hidden cursor-pointer" onclick="openModal('${p.id}')">
+              <img 
+                src="${p.image}" 
+                alt="${p.name}" 
+                onerror="this.onerror=null; this.src='https://placehold.co/300x300/062c20/D4AF37?text=${encodeURIComponent(p.fallbackText)}';"
+                class="w-full h-full object-cover transform group-hover:scale-105 transition duration-700" 
+              />
+              <span class="absolute top-3 left-3 bg-imperial-crimson/90 text-imperial-goldLight text-[11px] font-bold px-2.5 py-1 rounded border border-imperial-gold/30 font-serif shadow-md">
+                ${p.badge}
+              </span>
+              <div class="absolute inset-0 bg-gradient-to-t from-imperial-darkBg via-transparent to-transparent opacity-60"></div>
+            </div>
+
+            <!-- Content Container -->
+            <div class="p-5 space-y-3">
+              <div class="flex justify-between items-center text-xs text-gray-400">
+                <span class="text-imperial-gold font-mono">${p.categoryLabel}</span>
+                <span class="flex items-center gap-1 text-imperial-gold"><i class="fa-solid fa-star"></i> ${p.rating}</span>
+              </div>
+
+              <h3 class="font-serif font-bold text-lg text-white group-hover:text-imperial-gold transition line-clamp-1 cursor-pointer" onclick="openModal('${p.id}')">
+                ${p.name}
+              </h3>
+
+              <p class="text-xs text-gray-400 font-serif line-clamp-2 leading-relaxed">
+                ${p.desc}
+              </p>
+            </div>
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="p-5 pt-0 flex items-center justify-between border-t border-imperial-gold/10 mt-3">
+            <div>
+              <div class="text-[10px] text-gray-500 uppercase font-mono">Price</div>
+              <div class="text-lg font-bold text-imperial-gold font-sans">NT$ ${p.price.toLocaleString()}</div>
+            </div>
+
+            <button 
+              onclick="triggerAddToCartAnimation(event, '${p.id}')"
+              class="add-to-cart-btn relative px-4 py-2.5 rounded-lg bg-gradient-to-r from-imperial-gold to-imperial-goldDark text-black font-bold text-xs hover:shadow-[0_0_20px_rgba(212,175,55,0.6)] hover:scale-105 transition duration-300 font-serif flex items-center gap-2">
+              <i class="fa-solid fa-cart-plus"></i> 加入購物車
+            </button>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // Filter Buttons Toggle
+    function filterProducts(cat) {
+      document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active', 'bg-imperial-gold', 'text-black', 'font-bold');
+        btn.classList.add('glass-panel', 'text-gray-300');
+      });
+      event.target.classList.add('active', 'bg-imperial-gold', 'text-black', 'font-bold');
+      event.target.classList.remove('glass-panel', 'text-gray-300');
+      renderProducts(cat);
+    }
+
+    // --------------------------------------------------
+    // Anime "Add to Cart" Character Burst Effect (Canvas)
+    // --------------------------------------------------
+    const burstCanvas = document.getElementById('burst-canvas');
+    const burstCtx = burstCanvas.getContext('2d');
+    let burstParticles = [];
+
+    function resizeCanvas() {
+      burstCanvas.width = window.innerWidth;
+      burstCanvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    // Characters / Anime Elements for Burst
+    const animeSymbols = ['😺', '🧪', '🪭', '🍃', '🍵', '✨', '🌟', '🦚', '🌸', '🐍'];
+
+    class BurstParticle {
+      constructor(x, y, targetX, targetY) {
+        this.x = x;
+        this.y = y;
+        this.targetX = targetX;
+        this.targetY = targetY;
+        
+        // Initial explosive velocity
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 12 + 6;
+        this.vx = Math.cos(angle) * speed;
+        this.vy = Math.sin(angle) * speed - 3;
+        
+        this.symbol = animeSymbols[Math.floor(Math.random() * animeSymbols.length)];
+        this.size = Math.random() * 16 + 18;
+        this.alpha = 1;
+        this.rotation = Math.random() * Math.PI;
+        this.rotSpeed = (Math.random() - 0.5) * 0.2;
+        this.gravity = 0.25;
+        this.phase = 'explode'; // explode then magnetize to cart
+        this.ticks = 0;
+      }
+
+      update() {
+        this.ticks++;
+        this.rotation += this.rotSpeed;
+
+        if (this.phase === 'explode') {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.vy += this.gravity;
+          this.vx *= 0.95;
+
+          // After 20 frames, attract towards shopping cart icon
+          if (this.ticks > 22) {
+            this.phase = 'attract';
+          }
+        } else if (this.phase === 'attract') {
+          const dx = this.targetX - this.x;
+          const dy = this.targetY - this.y;
+          this.x += dx * 0.15;
+          this.y += dy * 0.15;
+          this.size *= 0.94;
+          
+          if (Math.hypot(dx, dy) < 25) {
+            this.alpha = 0;
+          }
+        }
+      }
+
+      draw(ctx) {
+        ctx.save();
+        ctx.globalAlpha = this.alpha;
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.font = `${this.size}px "Noto Serif TC", sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(this.symbol, 0, 0);
+        ctx.restore();
+      }
+    }
+
+    function animateBurst() {
+      burstCtx.clearRect(0, 0, burstCanvas.width, burstCanvas.height);
+      for (let i = burstParticles.length - 1; i >= 0; i--) {
+        const p = burstParticles[i];
+        p.update();
+        p.draw(burstCtx);
+        if (p.alpha <= 0 || p.size < 2) {
+          burstParticles.splice(i, 1);
+        }
+      }
+      requestAnimationFrame(animateBurst);
+    }
+    animateBurst();
+
+    function triggerAddToCartAnimation(e, productId) {
+      e.stopPropagation();
+      const rect = e.currentTarget.getBoundingClientRect();
+      const startX = rect.left + rect.width / 2;
+      const startY = rect.top + rect.height / 2;
+
+      // Cart icon coordinates
+      const cartBtn = document.getElementById('cart-btn');
+      const cartRect = cartBtn.getBoundingClientRect();
+      const targetX = cartRect.left + cartRect.width / 2;
+      const targetY = cartRect.top + cartRect.height / 2;
+
+      // Spawn burst particles
+      for (let i = 0; i < 28; i++) {
+        burstParticles.push(new BurstParticle(startX, startY, targetX, targetY));
+      }
+
+      // Add to cart data
+      addToCart(productId);
+
+      // Animate cart badge pulse
+      setTimeout(() => {
+        const badge = document.getElementById('cart-count');
+        badge.classList.remove('cart-pulse');
+        void badge.offsetWidth; // Trigger reflow
+        badge.classList.add('cart-pulse');
+      }, 500);
+    }
+
+    function quickAddToCart(index, e) {
+      triggerAddToCartAnimation(e, products[index].id);
+    }
+
+    // --------------------------------------------------
+    // Cart Logic
+    // --------------------------------------------------
+    function addToCart(productId) {
+      const existing = cart.find(item => item.id === productId);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        const prod = products.find(p => p.id === productId);
+        cart.push({ ...prod, qty: 1 });
+      }
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      // Total items count
+      const totalCount = cart.reduce((acc, item) => acc + item.qty, 0);
+      document.getElementById('cart-count').innerText = totalCount;
+
+      // Cart items list
+      const container = document.getElementById('cart-items');
+      container.innerHTML = '';
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 space-y-3">
+            <div class="text-4xl">🍃</div>
+            <p class="text-gray-400 font-serif text-sm">購物車空空如也...</p>
+            <p class="text-xs text-imperial-gold/60">快去選購藥師少女的精選週邊吧！</p>
+          </div>
+        `;
+      } else {
+        cart.forEach(item => {
+          const div = document.createElement('div');
+          div.className = "flex gap-3 items-center p-3 rounded-lg bg-black/40 border border-imperial-gold/20";
+          div.innerHTML = `
+            <img src="${item.image}" alt="${item.name}" onerror="this.src='https://placehold.co/100x100/062c20/D4AF37?text=Product';" class="w-14 h-14 object-cover rounded border border-imperial-gold/30" />
+            <div class="flex-1 min-w-0">
+              <h4 class="text-xs font-serif font-bold text-white truncate">${item.name}</h4>
+              <div class="text-xs text-imperial-gold font-sans font-bold mt-0.5">NT$ ${item.price}</div>
+              <div class="flex items-center gap-2 mt-1">
+                <button onclick="changeQty('${item.id}', -1)" class="w-5 h-5 bg-gray-800 text-imperial-gold rounded text-xs flex items-center justify-center">-</button>
+                <span class="text-xs font-mono text-white">${item.qty}</span>
+                <button onclick="changeQty('${item.id}', 1)" class="w-5 h-5 bg-gray-800 text-imperial-gold rounded text-xs flex items-center justify-center">+</button>
+              </div>
+            </div>
+            <button onclick="removeItem('${item.id}')" class="text-gray-500 hover:text-red-400 text-xs p-1">
+              <i class="fa-solid fa-trash"></i>
+            </button>
+          `;
+          container.appendChild(div);
+        });
+      }
+
+      // Price Calculations
+      const subtotal = cart.reduce((acc, item) => acc + (item.price * item.qty), 0);
+      const total = Math.max(0, subtotal - appliedDiscount);
+
+      document.getElementById('cart-subtotal').innerText = `NT$ ${subtotal.toLocaleString()}`;
+      document.getElementById('cart-discount').innerText = `- NT$ ${appliedDiscount.toLocaleString()}`;
+      document.getElementById('cart-total').innerText = `NT$ ${total.toLocaleString()}`;
+
+      // Free shipping bar (Free at NT$ 1000)
+      const freeShipThreshold = 1000;
+      const progress = Math.min(100, (subtotal / freeShipThreshold) * 100);
+      document.getElementById('shipping-progress').style.width = `${progress}%`;
+      
+      const shipText = document.getElementById('shipping-status-text');
+      if (subtotal >= freeShipThreshold) {
+        shipText.innerText = "已達免運門檻！";
+        shipText.className = "text-emerald-400 font-bold";
+      } else {
+        shipText.innerText = `還差 NT$ ${(freeShipThreshold - subtotal).toLocaleString()}`;
+        shipText.className = "text-imperial-gold font-bold";
+      }
+    }
+
+    function changeQty(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) {
+          cart = cart.filter(i => i.id !== id);
+        }
+      }
+      updateCartUI();
+    }
+
+    function removeItem(id) {
+      cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+    }
+
+    function applyPromoCode() {
+      const code = document.getElementById('promo-code').value.trim().toUpperCase();
+      if (code === 'MAOMAO100') {
+        appliedDiscount = 100;
+        alert('🎉 折扣碼套用成功！已為您折抵 NT$ 100');
+      } else if (code === '') {
+        alert('請輸入有效的折扣碼');
+      } else {
+        alert('❌ 無效的折扣碼，請確認後重試');
+      }
+      updateCartUI();
+    }
+
+    function toggleCartDrawer(open) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-drawer-backdrop');
+      if (open) {
+        backdrop.classList.remove('hidden');
+        drawer.classList.remove('translate-x-full');
+      } else {
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.add('hidden');
+      }
+    }
+
+    function simulateCheckout() {
+      if (cart.length === 0) {
+        alert('購物車是空的，快去挑選喜歡的藥師少女周邊吧！');
+        return;
+      }
+      alert('🌸 感謝您的購買！已成功送出宮廷御用訂單。貓貓正加緊為您打包草藥與精品！');
+      cart = [];
+      appliedDiscount = 0;
+      updateCartUI();
+      toggleCartDrawer(false);
+    }
+
+    // --------------------------------------------------
+    // Modal View
+    // --------------------------------------------------
+    function openModal(productId) {
+      const p = products.find(prod => prod.id === productId);
+      if (!p) return;
+
+      const content = document.getElementById('modal-content');
+      content.innerHTML = `
+        <div class="img-container rounded-xl overflow-hidden border border-imperial-gold/30">
+          <img src="${p.image}" alt="${p.name}" onerror="this.src='https://placehold.co/300x300/062c20/D4AF37?text=${encodeURIComponent(p.fallbackText)}';" class="w-full h-auto object-cover" />
+        </div>
+        <div class="space-y-4 font-serif">
+          <div>
+            <span class="text-xs text-imperial-gold font-mono">${p.categoryLabel} ‧ ${p.badge}</span>
+            <h3 class="text-2xl font-bold text-white mt-1">${p.name}</h3>
+            <p class="text-xs text-gray-400 font-cinzel">${p.englishName}</p>
+          </div>
+
+          <div class="text-xl font-bold text-imperial-gold font-sans">
+            NT$ ${p.price.toLocaleString()}
+          </div>
+
+          <p class="text-xs text-gray-300 leading-relaxed">
+            ${p.desc}
+          </p>
+
+          <div class="bg-black/40 p-3 rounded border border-imperial-gold/20 text-xs text-gray-400 space-y-1">
+            <div class="font-bold text-imperial-goldLight">商品規格：</div>
+            ${p.specs.map(s => `<div>• ${s}</div>`).join('')}
+          </div>
+
+          <div class="pt-2 flex gap-3">
+            <button 
+              onclick="triggerAddToCartAnimation(event, '${p.id}'); closeModal();"
+              class="flex-1 py-3 rounded-lg bg-gradient-to-r from-imperial-gold to-imperial-goldDark text-black font-bold text-xs hover:shadow-[0_0_25px_rgba(212,175,55,0.6)] transition font-serif">
+              <i class="fa-solid fa-cart-plus"></i> 加入購物車
+            </button>
+          </div>
+        </div>
+      `;
+      document.getElementById('product-modal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('product-modal').classList.add('hidden');
+    }
+
+    function scrollToFeatured() {
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function subscribeNewsletter() {
+      alert('🌸 成功訂閱後宮情報！有最新周邊發售將第一時間通知您。');
+    }
+
+    // --------------------------------------------------
+    // Ambient Floating Petals Canvas
+    // --------------------------------------------------
+    const ambientCanvas = document.getElementById('ambient-canvas');
+    const ambCtx = ambientCanvas.getContext('2d');
+    let petals = [];
+
+    function resizeAmbientCanvas() {
+      ambientCanvas.width = ambientCanvas.parentElement.clientWidth;
+      ambientCanvas.height = ambientCanvas.parentElement.clientHeight;
+    }
+    window.addEventListener('resize', resizeAmbientCanvas);
+
+    class Petal {
+      constructor() {
+        this.reset();
+      }
+      reset() {
+        this.x = Math.random() * ambientCanvas.width;
+        this.y = -20;
+        this.size = Math.random() * 6 + 4;
+        this.speedY = Math.random() * 1.2 + 0.5;
+        this.speedX = Math.random() * 0.8 - 0.4;
+        this.opacity = Math.random() * 0.6 + 0.2;
+        this.color = Math.random() > 0.5 ? '#D4AF37' : '#FFB7C5';
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += this.speedX;
+        if (this.y > ambientCanvas.height) this.reset();
+      }
+      draw() {
+        ambCtx.save();
+        ambCtx.globalAlpha = this.opacity;
+        ambCtx.fillStyle = this.color;
+        ambCtx.beginPath();
+        ambCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ambCtx.fill();
+        ambCtx.restore();
+      }
+    }
+
+    function initAmbient() {
+      resizeAmbientCanvas();
+      petals = Array.from({ length: 30 }, () => new Petal());
+      function loop() {
+        ambCtx.clearRect(0, 0, ambientCanvas.width, ambientCanvas.height);
+        petals.forEach(p => { p.update(); p.draw(); });
+        requestAnimationFrame(loop);
+      }
+      loop();
+    }
+
+    // Initial Page Load
+    window.onload = function() {
+      renderProducts('all');
+      initAmbient();
+      updateCartUI();
+    };
+  </script>
+</body>
+</html>
